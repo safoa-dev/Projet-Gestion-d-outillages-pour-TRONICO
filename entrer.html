@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recherche d'outillage</title>
+  <link rel="stylesheet" href="src/style1.css" />
+</head>
+<body>
+  <!-- Canvas fond animé -->
+  <canvas id="circuitCanvas"></canvas>
+
+  <div class="interface">
+    <label id="titre">Bienvenue dans la recherche d'outillage</label><br />
+    <label id="outill">Entrez le code de l'outil à rechercher !</label>
+
+    <!--Formulaire d insertion-->
+    <form id="outilForm" autocomplete="off">
+      <input
+        type="text"
+        id="outilt"
+        name="code"
+        placeholder="Taper le code ici!"
+        required
+        autofocus
+      /><br />
+      <button type="button" id="validerBtn">Valider</button>
+    </form>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

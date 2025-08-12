@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css" />
+    <title>Affichage Armoire</title>
+  </head>
+  <body>
+    <div class="futuristic-background">
+      <div class="circuit-lines">
+        <div class="circuit-line horizontal line-1"></div>
+        <div class="circuit-line horizontal line-2"></div>
+        <div class="circuit-line horizontal line-3"></div>
+        <div class="circuit-line horizontal line-4"></div>
+        <div class="circuit-line horizontal line-5"></div>
+        
+        <div class="circuit-line vertical line-6"></div>
+        <div class="circuit-line vertical line-7"></div>
+        <div class="circuit-line vertical line-8"></div>
+        <div class="circuit-line vertical line-9"></div>
+        <div class="circuit-line vertical line-10"></div>
+        
+        <div class="circuit-node node-1"></div>
+        <div class="circuit-node node-2"></div>
+        <div class="circuit-node node-3"></div>
+        <div class="circuit-node node-4"></div>
+        <div class="circuit-node node-5"></div>
+        <div class="circuit-node node-6"></div>
+      </div>
+      
+      <div class="pulse-container">
+        <div class="pulse pulse-1"></div>
+        <div class="pulse pulse-2"></div>
+        <div class="pulse pulse-3"></div>
+        <div class="pulse pulse-4"></div>
+        <div class="pulse pulse-5"></div>
+      </div>
+      
+      <div class="wave-container">
+        <div class="electromagnetic-wave wave-1"></div>
+        <div class="electromagnetic-wave wave-2"></div>
+        <div class="electromagnetic-wave wave-3"></div>
+      </div>
+    </div>
+
+    <!-- Fond animé minimaliste pour le 2ᵉ écran -->
+    <div id="dynamic-bg"></div>
+
+    <!-- canvas permet juste de cree un interface vide ou on va dessiner notre armoire en utilisant du js-->
+    <canvas id="model3d"></canvas>
+
+    <!-- Fiche d'informations de l'outillage -->
+    <div id="ficheOutillage" style="display:none;">
+      <h3>Fiche Outillage</h3>
+      <label>Code :</label>
+      <input type="text" id="numSerie" readonly />
+
+      <label>Numero de Serie :</label>
+      <input type="text" id="vnumos" readonly />
+             
+      <label>Emplacement :</label>
+      <input type="text" id="emplacement" readonly />
+       
+      <label>État :</label>
+      <div>
+        <input type="radio" name="etat" id="etatExiste" value="existe" />
+        <label for="etatExiste">Existe</label>
+        <input type="radio" name="etat" id="etatEmprunte" value="emprunte" />
+        <label for="etatEmprunte">Emprunté</label>
+      </div>
+       
+      <div id="detailsEmprunt" style="display:none;">
+        <label>Emprunteur :</label>
+        <input type="text" id="emprunteur" />
+        <label>Lieu :</label>
+        <input type="text" id="lieu" />
+      </div>
+       
+      <button id="btnEnregistrer">Enregistrer</button>
+      <button id="btnFermer" style="margin-left: 10px;">Fermer</button>
+    </div>
+
+    <!--  fiche pour MULTIPLES outillages dans un tiroir -->
+    <div id="ficheMultiplesOutillages" style="display:none;">
+      <!-- Le contenu sera généré dynamiquement par JavaScript -->
+    </div>
+
+    <!--  FICHE D'ACTION pour les boutons Ajouter/Supprimer/Modifier -->
+    <div id="ficheAction" style="display:none;">
+      <div class="fiche-header">
+        <h3 id="ficheActionTitle">Action</h3>
+        <button class="btn-fermer" onclick="fermerFicheAction()">&times;</button>
+      </div>
+      <div id="ficheActionContent">
+        <!-- Le contenu sera généré dynamiquement par JS -->
+      </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+ <div id="tooling-controls">
+  <button id="btnAdd" style="display: block; margin: 8px auto; width: 160px;">Ajouter Outillage</button>
+  <button id="btnDelete" style="display: block; margin: 8px auto; width: 160px;">Supprimer Outillage</button>
+  <button id="btnModify" style="display: block; margin: 8px auto; width: 160px;">Modifier Emplacement</button>
+</div>
+
+<!-- Modal personnalisé -->
+<div id="customModal" class="modal">
+  <div class="modal-content">
+    <p id="modalMessage">Message ici</p>
+    <div class="modal-buttons">
+      <button id="modalCloseBtn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT POUR LA GESTION DES TROIS BOUTTON AJOUTER SUPPRIMER ET MODIFIER -->
+<script>
+function afficherFicheAction(typeAction) {
+    const fiche = document.getElementById('ficheAction');
+    const title = document.getElementById('ficheActionTitle');
+    const content = document.getElementById('ficheActionContent');
+    
+    // Configuration selon le type d'action
+    let ficheConfig = {};
+    
+    switch(typeAction) {
+        case 'ajouter':
+            ficheConfig = {
+                title: '➕ Ajouter un Outillage',
+                content: `
+                    <div class="action-section">
+                        <h4>Informations de l'outillage</h4>
+                        <div class="form-group">
+                            <label for="nouveauCode">Code de l'outillage :</label>
+                            <input type="text" id="nouveauCode" placeholder="Ex: OUT001">
+                        </div>
+                        <div class="form-group">
+                            <label for="nouveauNumSerie">Numéro de série :</label>
+                            <input type="text" id="nouveauNumSerie" placeholder="Ex: SN123456">
+                        </div>
+                        <div class="form-group">
+                            <label for="nouvelEmplacement">Emplacement :</label>
+                            <input type="text" id="nouvelEmplacement" placeholder="Ex: A1T1 ou autre">
+                        </div>
+                        <div class="form-group">
+                            <label for="nouvelleDescription">Description (optionnel) :</label>
+                            <textarea id="nouvelleDescription" rows="3" placeholder="Description de l'outillage"></textarea>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-primary" onclick="confirmerAjout()">Ajouter l'outillage</button>
+                        <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Annuler</button>
+                    </div>
+                `
+            };
+            break;
+            
+        case 'supprimer':
+            ficheConfig = {
+                title: '🗑️ Supprimer un Outillage',
+                content: `
+                    <div class="action-section">
+                        <h4>Sélection de l'outillage à supprimer</h4>
+                        <div class="form-group">
+                            <label for="codeSupprimer">Numero de serie de l'outillage :</label>
+                            <input type="text" id="codeSupprimer" placeholder="Entrez le code de l'outillage à supprimer">
+                        </div>
+                        <div class="form-group">
+                            <label for="emplacementSupprimer">Ou saisissez l'emplacement :</label>
+                            <input type="text" id="emplacementSupprimer" placeholder="Ex: A1T1 ou autre">
+                        </div>
+                        <div class="error-message" style="display: none;" id="warningSupprimer">
+                            ⚠️ Attention : Cette action est irréversible !
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-primary" onclick="confirmerSuppression()">Supprimer l'outillage</button>
+                        <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Annuler</button>
+                    </div>
+                `
+            };
+            break;
+            
+        case 'modifier':
+            ficheConfig = {
+                title: '✏️ Modifier Emplacement',
+                content: `
+                    <div class="action-section">
+                        <h4>Sélection de l'outillage à modifier</h4>
+                        <div class="form-group">
+                            <label for="numeroSerieModifier">Numéro de série :</label>
+                            <input type="text" id="numeroSerieModifier" placeholder="Entrez le numéro de série">
+  
+                        </div>
+                        <div class="form-group">
+                            <label for="ancienEmplacement">Emplacement actuel :</label>
+                            <input type="text" id="ancienEmplacement" placeholder="Emplacement actuel sera affiché ici">
+                        </div>
+                    </div>
+                    <div class="action-section">
+                        <h4>Nouvel emplacement</h4>
+                        <div class="form-group">
+                            <label for="nouvelEmplacementModif">Nouvel emplacement :</label>
+                            <input type="text" id="nouvelEmplacementModif" placeholder="Ex: A1T1 ou autre">
+                        </div>
+                        <div class="form-group">
+                            <label for="raisonModification">Raison de la modification :</label>
+                            <textarea id="raisonModification" rows="2" placeholder="Pourquoi changer l'emplacement ?"></textarea>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-primary" onclick="confirmerModification()">Modifier l'emplacement</button>
+                        <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Annuler</button>
+                    </div>
+                `
+            };
+            break;
+    }
+    
+    // Afficher la fiche avec le contenu approprié
+    title.textContent = ficheConfig.title;
+    content.innerHTML = ficheConfig.content;
+    fiche.style.display = 'block';
+}
+
+
+function fermerFicheAction() {
+    document.getElementById('ficheAction').style.display = 'none';
+}
+
+async function confirmerAjout() {
+  const code = document.getElementById('nouveauCode').value.trim();
+  const numSerie = document.getElementById('nouveauNumSerie').value.trim();
+  const emplacement = document.getElementById('nouvelEmplacement').value.trim();
+  const description = document.getElementById('nouvelleDescription').value.trim();
+
+  if (!code || !numSerie || !emplacement) {
+    alert('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost/threeTest/GestionOutillage/public/addOutillage.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        Code: code,
+        NumeroSerie: numSerie,
+        Emplacement: emplacement,
+        Etat: 'Disponible',  // Valeur par défaut, modifie si besoin
+        Description: description,
+        Emprunteur: '',      // Par défaut vide
+        Lieu: ''             // Par défaut vide
+      })
+    });
+
+    const json = await response.json();
+
+    if (json.success) {
+      const content = document.getElementById('ficheActionContent');
+      content.innerHTML = `
+        <div class="success-message">
+          ✅ Outillage ajouté avec succès !<br>
+          Code: ${code}<br>
+          N° série: ${numSerie}<br>
+          Emplacement: ${emplacement}
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Fermer</button>
+        </div>
+      `;
+      // Rafraîchir la liste des outillages si fonction disponible
+      if (typeof chargerEmplacements === 'function') {
+        chargerEmplacements();
+      }
+    } else {
+      alert('Erreur lors de l\'ajout : ' + (json.error || 'Erreur inconnue'));
+    }
+  } catch (error) {
+    alert('Erreur réseau ou serveur.');
+    console.error(error);
+  }
+}
+
+
+
+async function confirmerSuppression() {
+  const numeroSerie = document.getElementById('codeSupprimer').value.trim(); // codeSupprimer contient NumeroSerie
+  const emplacement = document.getElementById('emplacementSupprimer').value.trim();
+
+  if (!numeroSerie || !emplacement) {
+    alert('Veuillez remplir à la fois le numéro de série et l\'emplacement.');
+    return;
+  }
+
+  if (!confirm("⚠️ Attention : Cette action est irréversible !\nVoulez-vous continuer ?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost/threeTest/GestionOutillage/public/deleteOutillage.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ NumeroSerie: numeroSerie, Emplacement: emplacement })
+    });
+
+    const json = await response.json();
+
+    if (json.success) {
+      const content = document.getElementById('ficheActionContent');
+      content.innerHTML = `
+        <div class="success-message">
+          ✅ Outillage supprimé avec succès !<br>
+          N° série: ${numeroSerie}<br>
+          Emplacement: ${emplacement}
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Fermer</button>
+        </div>
+      `;
+      if (typeof chargerEmplacements === 'function') {
+        chargerEmplacements();
+      }
+    } else {
+      alert('Erreur lors de la suppression : ' + (json.error || 'Erreur inconnue'));
+    }
+  } catch (error) {
+    alert('Erreur réseau ou serveur.');
+    console.error(error);
+  }
+}
+
+
+async function confirmerModification() {
+  const numeroSerie = document.getElementById('numeroSerieModifier').value.trim();
+  const ancienEmplacement = document.getElementById('ancienEmplacement').value.trim();
+  const nouvelEmplacement = document.getElementById('nouvelEmplacementModif').value.trim();
+  const raison = document.getElementById('raisonModification').value.trim();
+
+  if (!numeroSerie || !ancienEmplacement || !nouvelEmplacement) {
+    alert('Veuillez remplir le numéro de série, l’emplacement actuel et le nouvel emplacement.');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost/threeTest/GestionOutillage/public/updateOutillage.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        NumeroSerie: numeroSerie,
+        AncienEmplacement: ancienEmplacement,
+        NouvelEmplacement: nouvelEmplacement,
+        Raison: raison
+      })
+    });
+
+    const json = await response.json();
+
+    if (json.success) {
+      const content = document.getElementById('ficheActionContent');
+      content.innerHTML = `
+        <div class="success-message">
+          ✅ Emplacement modifié avec succès !<br>
+          Numéro de série: ${numeroSerie}<br>
+          Ancien emplacement: ${ancienEmplacement}<br>
+          Nouvel emplacement: ${nouvelEmplacement}<br>
+          ${raison ? 'Raison: ' + raison : ''}
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn btn-secondary" onclick="fermerFicheAction()">Fermer</button>
+        </div>
+      `;
+      if (typeof chargerEmplacements === 'function') {
+        chargerEmplacements();
+      }
+    } else {
+      alert('Erreur lors de la modification : ' + (json.message || 'Erreur inconnue'));
+    }
+  } catch (error) {
+    alert('Erreur réseau ou serveur.');
+    console.error(error);
+  }
+}
+
+
+// Ajouter les event listeners aux boutons existants
+document.addEventListener('DOMContentLoaded', function() {
+    // Remplacer les anciens event listeners par les nouveaux
+    const btnAdd = document.getElementById('btnAdd');
+    const btnDelete = document.getElementById('btnDelete');
+    const btnModify = document.getElementById('btnModify');
+    
+    if (btnAdd) {
+        btnAdd.addEventListener('click', () => afficherFicheAction('ajouter'));
+    }
+    
+    if (btnDelete) {
+        btnDelete.addEventListener('click', () => afficherFicheAction('supprimer'));
+    }
+    
+    if (btnModify) {
+        btnModify.addEventListener('click', () => afficherFicheAction('modifier'));
+    }
+});
+</script>
+
+  </body>
+</html>

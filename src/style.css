@@ -1,0 +1,1096 @@
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: transparent !important;
+}
+#ficheOutillage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(94, 142, 190, 0.95);
+  border: 2px solid #00ffff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), 0 8px 16px rgba(0, 0, 0, 0.6);
+  max-width: 360px;
+  width: 90%;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+
+#ficheOutillage h2 {
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+#ficheOutillage h3 {
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+#ficheOutillage label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #cccccc;
+}
+
+#ficheOutillage input[type="text"], 
+#ficheOutillage input[type="radio"] {
+  margin-top: 6px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #00ffff;
+  border-radius: 4px;
+  font-size: 1em;
+  background: rgba(0, 50, 80, 0.8);
+  color: #ffffff;
+}
+
+#ficheOutillage input[type="text"]:focus {
+  outline: none;
+  border-color: #66ffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+#ficheOutillage button {
+  margin-top: 20px;
+  background: linear-gradient(45deg, #0066cc, #00aaff);
+  color: white;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#ficheOutillage button:hover {
+  background: linear-gradient(45deg, #0088ff, #00ccff);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+#ficheMultiplesOutillages {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(94, 142, 190, 0.95), rgba(15, 107, 196, 0.95));
+  border: 2px solid #00ffff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.6),
+    0 10px 20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 1001;
+  max-width: 750px;
+  max-height: 85vh;
+  overflow-y: auto;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  backdrop-filter: blur(15px);
+  width: 90%;
+}
+
+.fiche-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 15px;
+}
+
+.fiche-title {
+  margin: 0;
+  color: #00ffff;
+  font-size: 26px;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.btn-fermer {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-size: 24px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-fermer:hover {
+  background: rgba(255, 0, 100, 0.6);
+  border-color: #ff0066;
+  color: #ffffff;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 
+    0 0 20px rgba(255, 0, 102, 0.6),
+    0 0 30px rgba(255, 0, 102, 0.3);
+}
+
+.fiche-stats {
+  margin-bottom: 20px;
+  padding: 12px 18px;
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-left: 4px solid #00ffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #00ffff;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.outillage-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-left: 4px solid #00ffff;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.outillage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 255, 255, 0.1), 
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.outillage-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.4);
+}
+
+.outillage-card:hover::before {
+  left: 100%;
+}
+
+.outillage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.outillage-title {
+  margin: 0;
+  color: #00ffff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.outillage-badge {
+  background: rgba(0, 255, 255, 0.15);
+  color: #00ffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.outillage-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #90caf9;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.9;
+}
+
+.detail-value {
+  color: #ffffff;
+  padding: 6px 10px;
+  background: rgba(0, 50, 80, 0.6);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.detail-value:hover {
+  background: rgba(0, 80, 120, 0.8);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.no-outillages {
+  text-align: center;
+  padding: 50px 20px;
+  color: #90caf9;
+  font-size: 18px;
+}
+
+.no-outillages-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.4;
+  color: #00ffff;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Scrollbar personnalisée pour la fiche */
+#ficheMultiplesOutillages::-webkit-scrollbar {
+  width: 8px;
+}
+
+#ficheMultiplesOutillages::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+#ficheMultiplesOutillages::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+#ficheMultiplesOutillages::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.6);
+}
+
+/* ========== BACKGROUND FUTURISTE AVEC CIRCUIT ========== */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1382e9, #0f6bc4, #1590f0, #0a5ba0);
+  font-family: Arial, sans-serif;
+}
+
+/* Container principal du background futuriste */
+.futuristic-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1382e9, #0f6bc4, #1590f0, #0a5ba0);
+  animation: backgroundShift 20s infinite ease-in-out;
+}
+
+/* ========== LIGNES DE CIRCUIT ========== */
+
+.circuit-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+}
+
+/* Styles de base pour les lignes de circuit */
+.circuit-line {
+  position: absolute;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 255, 255, 0.1) 20%, 
+    rgba(0, 255, 255, 0.6) 50%, 
+    rgba(0, 255, 255, 0.1) 80%, 
+    transparent 100%
+  );
+  opacity: 0.4;
+  animation: circuitPulse 4s infinite ease-in-out;
+}
+
+/* Lignes horizontales */
+.circuit-line.horizontal {
+  height: 2px;
+  width: 100%;
+}
+
+.circuit-line.horizontal.line-1 { top: 15%; animation-delay: 0s; }
+.circuit-line.horizontal.line-2 { top: 35%; animation-delay: 1s; }
+.circuit-line.horizontal.line-3 { top: 55%; animation-delay: 2s; }
+.circuit-line.horizontal.line-4 { top: 75%; animation-delay: 3s; }
+.circuit-line.horizontal.line-5 { top: 85%; animation-delay: 0.5s; }
+
+/* Lignes verticales */
+.circuit-line.vertical {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(0deg, 
+    transparent 0%, 
+    rgba(0, 255, 255, 0.1) 20%, 
+    rgba(0, 255, 255, 0.6) 50%, 
+    rgba(0, 255, 255, 0.1) 80%, 
+    transparent 100%
+  );
+}
+
+.circuit-line.vertical.line-6 { left: 20%; animation-delay: 1.5s; }
+.circuit-line.vertical.line-7 { left: 40%; animation-delay: 2.5s; }
+.circuit-line.vertical.line-8 { left: 60%; animation-delay: 0.8s; }
+.circuit-line.vertical.line-9 { left: 80%; animation-delay: 3.2s; }
+.circuit-line.vertical.line-10 { left: 90%; animation-delay: 1.8s; }
+
+/* Nœuds de connexion */
+.circuit-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #00ffff 0%, rgba(0, 255, 255, 0.3) 70%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.4);
+  animation: nodePulse 3s infinite ease-in-out;
+}
+
+.circuit-node.node-1 { top: 15%; left: 20%; animation-delay: 0s; }
+.circuit-node.node-2 { top: 35%; left: 40%; animation-delay: 1s; }
+.circuit-node.node-3 { top: 55%; left: 60%; animation-delay: 2s; }
+.circuit-node.node-4 { top: 75%; left: 80%; animation-delay: 0.5s; }
+.circuit-node.node-5 { top: 85%; left: 90%; animation-delay: 1.5s; }
+.circuit-node.node-6 { top: 35%; left: 90%; animation-delay: 2.5s; }
+
+/* ========== IMPULSIONS LUMINEUSES ========== */
+
+.pulse-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+}
+
+.pulse {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #00ffff 0%, rgba(0, 255, 255, 0.8) 50%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 255, 1),
+    0 0 30px rgba(0, 255, 255, 0.6),
+    0 0 45px rgba(0, 255, 255, 0.3);
+  animation: pulseMove 6s infinite linear;
+}
+
+.pulse.pulse-1 {
+  top: 15%;
+  left: 0%;
+  animation-delay: 0s;
+  animation-name: pulseHorizontal1;
+}
+
+.pulse.pulse-2 {
+  top: 35%;
+  left: 0%;
+  animation-delay: 2s;
+  animation-name: pulseHorizontal2;
+}
+
+.pulse.pulse-3 {
+  top: 20%;
+  left: 0%;
+  animation-delay: 1s;
+  animation-name: pulseVertical1;
+}
+
+.pulse.pulse-4 {
+  top: 0%;
+  left: 60%;
+  animation-delay: 3s;
+  animation-name: pulseVertical2;
+}
+
+.pulse.pulse-5 {
+  top: 55%;
+  left: 0%;
+  animation-delay: 4s;
+  animation-name: pulseHorizontal3;
+}
+
+/* ========== ONDES ÉLECTROMAGNÉTIQUES ========== */
+
+.wave-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+}
+
+.electromagnetic-wave {
+  position: absolute;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 255, 0.1) 25%,
+    rgba(0, 255, 255, 0.3) 50%,
+    rgba(0, 255, 255, 0.1) 75%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: waveMove 8s infinite ease-in-out;
+}
+
+.electromagnetic-wave.wave-1 {
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.electromagnetic-wave.wave-2 {
+  top: 50%;
+  animation-delay: 3s;
+}
+
+.electromagnetic-wave.wave-3 {
+  top: 80%;
+  animation-delay: 6s;
+}
+
+
+ /* Styles pour la nouvelle fiche multiples outillages */
+      #ficheMultiplesOutillages {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        z-index: 1000;
+        max-width: 700px;
+        max-height: 80vh;
+        overflow-y: auto;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        border: 2px solid rgba(255,255,255,0.1);
+      }
+
+      .fiche-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid rgba(255,255,255,0.2);
+        padding-bottom: 15px;
+      }
+
+      .fiche-title {
+        margin: 0;
+        color: #fff;
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+
+      .btn-fermer {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        font-size: 24px;
+        padding: 8px 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-fermer:hover {
+        background: rgba(255,0,0,0.6);
+        transform: rotate(90deg);
+      }
+
+      .fiche-stats {
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        border-left: 4px solid #4fc3f7;
+      }
+
+      .outillage-card {
+        background: rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid #4fc3f7;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .outillage-card:hover {
+        background: rgba(255,255,255,0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      }
+
+      .outillage-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .outillage-title {
+        margin: 0;
+        color: #4fc3f7;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .outillage-badge {
+        background: rgba(79, 195, 247, 0.2);
+        color: #4fc3f7;
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 12px;
+        border: 1px solid #4fc3f7;
+      }
+
+      .outillage-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .detail-label {
+        font-weight: bold;
+        color: #90caf9;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-value {
+        color: #ffffff;
+        padding: 4px 8px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 4px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .no-outillages {
+        text-align: center;
+        padding: 40px;
+        color: #90caf9;
+        font-size: 16px;
+      }
+
+      .no-outillages-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+        opacity: 0.5;
+      }
+
+      /* STYLES POUR LA NOUVELLE FICHE D'ACTION */
+      #ficheAction {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        z-index: 2000;
+        min-width: 500px;
+        max-width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        border: 2px solid rgba(255,255,255,0.2);
+      }
+
+      #ficheAction h3 {
+        margin: 0;
+        color: #fff;
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+
+      #ficheActionContent {
+        margin-top: 20px;
+      }
+
+      .action-section {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .action-section h4 {
+        color: #74b9ff;
+        margin-top: 0;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(116, 185, 255, 0.3);
+        padding-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        color: #ddd;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 5px;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        font-size: 14px;
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255,255,255,0.6);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .action-btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #00b894, #00a085);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(45deg, #00a085, #008f75);
+        box-shadow: 0 4px 8px rgba(0, 184, 148, 0.3);
+      }
+
+      .btn-secondary {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255,255,255,0.3);
+      }
+
+      .success-message {
+        background: rgba(0, 184, 148, 0.2);
+        color: #00b894;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #00b894;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .error-message {
+        background: rgba(231, 76, 60, 0.2);
+        color: #e74c3c;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #e74c3c;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        #ficheMultiplesOutillages,
+        #ficheAction {
+          max-width: 95%;
+          padding: 20px;
+        }
+        
+        .outillage-details {
+          grid-template-columns: 1fr;
+        }
+        
+        .fiche-title,
+        #ficheAction h3 {
+          font-size: 20px;
+        }
+
+        #ficheAction {
+          min-width: auto;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+      }
+
+      #tooling-controls {
+    position: fixed;
+    bottom: 20px;
+    right: -10px;
+    z-index: 2000;
+    background: transparent;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    width: 180px;
+    
+  }
+
+  #tooling-controls button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 0;
+    background: linear-gradient(45deg, #4caf50, #388e3c);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+  }
+
+  #tooling-controls button:hover {
+    background: linear-gradient(45deg, #66bb6a, #2e7d32);
+    box-shadow: 0 0 8px #4caf50;
+  }
+
+  #tooling-controls button:active {
+    background: #388e3c;
+    box-shadow: none;
+  }
+
+  /* Fond du modal */
+  .modal {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Contenu du modal */
+  .modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Boutons du modal */
+  .modal-buttons button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2a9df4;
+    color: white;
+    cursor: pointer;
+  }
+
+  .modal-buttons button:hover {
+    background-color: #1f7cc0;
+  }
+
+
+/* ========== ANIMATIONS ========== */
+
+/* Animation de pulsation pour les lignes de circuit */
+@keyframes circuitPulse {
+  0%, 100% { 
+    opacity: 0.2; 
+    filter: brightness(0.5);
+  }
+  50% { 
+    opacity: 0.8; 
+    filter: brightness(1.5);
+  }
+}
+
+/* Animation pour les nœuds de connexion */
+@keyframes nodePulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Animations pour les impulsions horizontales */
+@keyframes pulseHorizontal1 {
+  0% { 
+    left: 0%; 
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    left: 100%; 
+    opacity: 0;
+  }
+}
+
+@keyframes pulseHorizontal2 {
+  0% { 
+    left: 100%; 
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    left: 0%; 
+    opacity: 0;
+  }
+}
+
+@keyframes pulseHorizontal3 {
+  0% { 
+    left: 0%; 
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    left: 100%; 
+    opacity: 0;
+  }
+}
+
+/* Animations pour les impulsions verticales */
+@keyframes pulseVertical1 {
+  0% { 
+    top: 0%; 
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    top: 100%; 
+    opacity: 0;
+  }
+}
+
+@keyframes pulseVertical2 {
+  0% { 
+    top: 100%; 
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    top: 0%; 
+    opacity: 0;
+  }
+}
+
+/* Animation des ondes électromagnétiques */
+@keyframes waveMove {
+  0% { 
+    transform: translateX(-100%) scaleY(0.5);
+    opacity: 0;
+  }
+  10% { 
+    opacity: 0.3;
+    transform: translateX(-80%) scaleY(0.8);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: translateX(0%) scaleY(1);
+  }
+  90% { 
+    opacity: 0.3;
+    transform: translateX(80%) scaleY(0.8);
+  }
+  100% { 
+    transform: translateX(100%) scaleY(0.5);
+    opacity: 0;
+  }
+}
+
+/* Animation de changement d'arrière-plan */
+@keyframes backgroundShift {
+  0%, 100% { 
+    background: linear-gradient(135deg, #1382e9, #0f6bc4, #1590f0, #0a5ba0); 
+  }
+  25% { 
+    background: linear-gradient(135deg, #0f6bc4, #1590f0, #0a5ba0, #1077cc); 
+  }
+  50% { 
+    background: linear-gradient(135deg, #1590f0, #0a5ba0, #1077cc, #0f6bc4); 
+  }
+  75% { 
+    background: linear-gradient(135deg, #0a5ba0, #1077cc, #0f6bc4, #1382e9); 
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+/*ca permet d adapter le style quand la largeur de l ecran est inferirieur ou egale a 768px*/
+@media (max-width: 768px) {
+  .circuit-line {
+    opacity: 0.3;
+  }
+  
+  .circuit-node {
+    width: 6px;
+    height: 6px;
+    box-shadow: 
+      0 0 8px rgba(0, 255, 255, 0.6),
+      0 0 15px rgba(0, 255, 255, 0.3);
+  }
+  
+  .pulse {
+    width: 3px;
+    height: 3px;
+    box-shadow: 
+      0 0 10px rgba(0, 255, 255, 0.8),
+      0 0 20px rgba(0, 255, 255, 0.4);
+  }
+  
+  .electromagnetic-wave {
+    height: 150px;
+  }
+
+  /* Responsive pour la fiche multiples outillages */
+  #ficheMultiplesOutillages {
+    max-width: 95%;
+    padding: 20px;
+    max-height: 90vh;
+  }
+  
+  .outillage-details {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .fiche-title {
+    font-size: 22px;
+  }
+
+  .outillage-title {
+    font-size: 16px;
+  }
+
+  .btn-fermer {
+    font-size: 20px;
+    padding: 6px 10px;
+  }
+}
+

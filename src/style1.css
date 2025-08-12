@@ -1,0 +1,122 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #000000; 
+  color: #000000;
+  position: relative;
+}
+
+#circuitCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 0;
+  background-color: #184977;
+}
+
+.interface {
+  position: relative;
+  z-index: 10; 
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 110px 20px;
+  background: rgba(255, 255, 255, 0.85); 
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+  top: 10vh;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+.interface.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#titre {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #003366; 
+  position: relative;
+  top: -50px;
+}
+
+#outill {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #005599; 
+  position: relative;
+  top: 20px;
+}
+
+#outilt {
+  width: 80%;
+  padding: 15px 12px;
+  font-size: 1.2rem;
+  border: 2px solid #005599;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  margin-bottom: 25px;
+  position: relative;
+  top: 30px;
+}
+
+#outilt:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 8px rgba(0,119,204,0.6);
+}
+
+#validerBtn {
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  top: 30px;
+  transform: scale(1.05);
+  background-color: #1382e9;
+  box-shadow: 0 0 10px #1382e9;
+}
+
+#validerBtn:hover {
+  background-color: #005999;
+}
+@media (max-width: 600px) {
+  .interface {
+    width: 90%;
+    padding: 30px 10px;
+  }
+  
+  #titre {
+    font-size: 2rem;
+  }
+  
+  #outill {
+    font-size: 1.2rem;
+  }
+  
+  #outilt {
+    width: 100%;
+  }
+  
+  #validerBtn {
+    width: 100%;
+    padding: 15px;
+  }
+}
